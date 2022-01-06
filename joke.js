@@ -5,48 +5,48 @@ const jokes = document.querySelector('#joke');
 const jokeBtn = document.querySelector('#jokeBtn');
 
 
-function getJokes() {
-    const setHeader = {
-        headers : {
-            Accept: "application/json"    
-        }
-    }
-    fetch('https://icanhazdadjoke.com/', setHeader)
-    .then ( (response)=> response.json())
-    .then ( (data)=> {
-        jokes.innerHTML = data.joke;    //data.joke from response
-     })
-    .catch ( ( error)=> {
-        console.console(error)          //if fetch fails
-    })
-}
-jokeBtn.addEventListener('click', getJokes);
-getJokes();     //for first joke on site we call it here
-
-
-
-
-//SAME THING WITH ASYNC AWAIT
-// async function getJokes(){
-//     try{
+// function getJokes() {
 //     const setHeader = {
 //         headers : {
 //             Accept: "application/json"    
 //         }
 //     }
-//     let response = await fetch('https://icanhazdadjoke.com/', setHeader)
-//     const data  =  await response.json();
-//     jokes.innerHTML = data.joke; 
-
-//     }
-//     catch(err) {
-//         console.log(error);
-//     }
-
+//     fetch('https://icanhazdadjoke.com/', setHeader)
+//     .then ( (response)=> response.json())
+//     .then ( (data)=> {
+//         jokes.innerHTML = data.joke;    
+//      })
+//     .catch ( ( error)=> {
+//         console.console(error)          
+//     })
 // }
-
 // jokeBtn.addEventListener('click', getJokes);
-// getJokes();
+// getJokes();    
+
+
+async function getJokes() {
+   
+    try{
+       
+    const setHeader = {
+        headers : {
+            Accept: "application/json"    
+        }
+    }
+     const response = await fetch('https://icanhazdadjoke.com/', setHeader)
+    const data = await response.json()
+
+    jokes.innerHTML = data.joke; 
+    }
+catch(error){
+    console.log(error)
+
+}
+
+}
+jokeBtn.addEventListener('click', getJokes);
+getJokes();    
+
 
 
 
